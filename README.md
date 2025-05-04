@@ -1,140 +1,172 @@
-<<<<<<< HEAD
-# GHMO भजन कार्यक्रम Invitation Generator
+# GHMO Invitation Generator
 
-A responsive, TypeScript + Bootstrap web app for generating and exporting letter-size invitations for the Greater Harrisburg Magar Organization’s भजन कार्यक्रम.
+This repository contains the **GHMO Invitation Generator**, a React + TypeScript application for generating invitation documents (PDF and JPEG) with a custom letterhead. It has been migrated from Webpack to **Vite** for faster builds and a simpler setup.
 
-## 🚀 Features
+---
 
-- **Gradient Header**  
-  Purple → Blue background with your logo and **GHMO भजन कार्यक्रम Invitation Generator** welcome text.
+## 🛠️ Features
 
-- **Custom Font**  
-  “GHMO” acronym rendered in the **Akkha Rika** WOFF2 font.
+- 🔄 **Fast dev** server with HMR via Vite
+- 📦 **Production build** optimizations out-of-the-box
+- 📄 Generates both PDF and JPEG invitation files
+- 🔐 6-digit PIN-based login (via Firebase Auth)
+- ⚡ Live preview of invitation changes
 
-- **Fillable Form**
+---
 
-  - **दिन** (Day) — single-select dropdown
-  - **भूमिका** (Role) — single-select dropdown
-  - **पूजा प्रकार** (Puja Type) — single-select dropdown
-  - **आयोजकको नाम** (Host Name) — text input
-  - **ठेगाना** (Address) — text input
-  - **मिति** (Date) — date picker with calendar icon
-  - **समय** (Time) — time picker with clock icon
+## 🚀 Getting Started
 
-- **Live Preview**
+### Prerequisites
 
-  - Desktop: preview shown to the right of the form
-  - Mobile: preview below the form
-  - **Letter-size canvas** (8.5″×11″) for pixel-perfect export
-  - Centered body title **हार्दिक निमन्त्रणा**
-  - Dynamic inputs in **bold**, tight signature spacing
+- **Node.js** v14 or higher
+- **npm**, **Yarn**, or **pnpm**
 
-- **Export Options**
+### Installation
 
-  - 📄 **Download PDF** (jsPDF, letter format)
-  - 🖼️ **Download JPG** (html2canvas → JPEG)
-
-- **Responsive & Accessible**
-  - Inline date/time on small screens
-  - Evenly-spaced export buttons
-  - Reduced font sizes on mobile via media queries
-
-## 📁 Project Structure
-
-ghmo-document-generator/
-├── public/
-│ └── logo-placeholder.png
-├── src/
-│ ├── fonts/
-│ │ └── Akkha-Rika.woff2
-│ ├── components/
-│ │ ├── InvitationForm.tsx
-│ │ └── PreviewCard.tsx
-│ ├── styles/
-│ │ └── invitation.css
-│ ├── utils/
-│ │ └── generateExport.ts
-│ └── App.tsx
-├── index.html
-├── main.tsx
-├── tsconfig.json
-├── webpack.config.js
-└── package.json
-
-## ⚙️ Installation
+Clone the repo and install dependencies:
 
 ```bash
 git clone https://github.com/rob2rhyme/ghmo-document-generator.git
 cd ghmo-document-generator
-npm install
-
-
-npm start        # starts webpack-dev-server at http://localhost:8080
-
-npm run build    # outputs to /dist folder
+npm install      # or yarn install, pnpm install
 ```
-=======
-# Letterhead Generator
 
-A Next.js + TypeScript web app that lets users fill out a simple invitation form, preview it in real time at true letter size (8.5″×11″), and download it as either a PDF or a JPEG.  
+### Development
 
-- **Form** on the left (35% width) ● **Preview** on the right (65% width)  
-- Live “what-you-see-is-what-you-print” preview with ½″ page margins  
-- Download as PDF (letter format) or high-quality JPEG  
-- Responsive: stacks vertically on screens <768px  
-
-![Demo Screenshot](./public/screenshot.png)
-
----
-
-## Features
-
-- **Pre-assigned multi-select form**  
-  - Organization, Event, Date, Time, Address, Phone  
-- **Letter-size live preview** with bleed  
-- **Download controls**  
-  - “Download PDF” → letter-format PDF via `jsPDF`  
-  - “Download JPEG” → high-quality JPG via `html2canvas`  
-- **Responsive layout**  
-  - 35% form / 65% preview on desktop  
-  - Vertical stack on mobile (<768px)  
-
----
-
-## Folder Structure
-
-letterhead-generator/
-├── components/
-│ ├── LetterheadForm.tsx # Form + download logic
-│ └── Preview.tsx # Live preview component
-├── pages/
-│ ├── index.tsx # Renders form & preview
-│ └── api/ # (optional) server-side routes
-├── public/
-│ └── screenshot.png # Example preview screenshot
-├── styles/
-│ ├── globals.css # Reset & theme
-│ ├── LetterheadForm.module.css
-│ └── Preview.module.css
-├── utils/
-│ └── firebase.ts # (optional) Firestore setup
-├── tsconfig.json
-├── package.json
-└── README.md
-
-
----
-
-## Run in Development
+Start the Vite dev server with hot-reload:
 
 ```bash
-npm install
 npm run dev
+```
+
+By default, the app will be available at `http://localhost:3000/`.
+
+### Production Build
+
+Generate optimized assets for production:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist/` directory.
+
+### Preview Build Locally
+
+Serve the production build locally to verify before deploying. You can use Vite's built-in preview:
+
+```bash
+npm run preview
+```
+
+Or serve the `dist/` folder as a static site using:
+
+````bash
+npx serve dist
+# or
+npx http-server dist
+```bash
+npm run preview
+````
+
+---
+
+## ⚙️ Configuration
+
+### Vite
+
+Your `vite.config.ts` is set up for React and code-splitting:
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 3000, hmr: { overlay: false } },
+  build: {
+    // Customize chunk splitting and warnings
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) return "vendor";
+        },
+      },
+    },
+  },
+});
+```
+
+### Tailwind CSS & PostCSS
+
+Configured via `tailwind.config.js` and `postcss.config.js`. Ensure `autoprefixer` is installed as a dev dependency:
+
+```bash
+npm install -D autoprefixer
+```
+
+---
+
+## 📦 Deployment
+
+### Vercel
+
+To deploy to Vercel, include a `vercel.json` at the project root:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
+}
+```
+
+Make sure your `package.json` scripts include:
+
+```json
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "start": "vite preview"
+}
+```
+
+Commit and push to trigger the Vercel build.
+
+---
+
+## 📁 Project Structure
 
 ```
-## Build & Start
-npm run build
-npm run start
+├── public/               Static assets served at /
+├── src/                  Application source code
+│   ├── App.tsx
+│   ├── styles/           CSS modules and global styles
+│   └── components/       Reusable React components
+├── index.html            Vite HTML entrypoint
+├── vite.config.ts        Vite configuration
+├── postcss.config.js     PostCSS setup (Tailwind, autoprefixer)
+├── tailwind.config.js    Tailwind CSS configuration
+├── package.json
+└── README.md             Project documentation
+```
 
-Open http://localhost:3000 in your browser.
->>>>>>> 1574f969cdb14bc3a03b3fb7faf16407264c94ba
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please open issues or pull requests for fixes and enhancements.
+
+---
+
+## 📜 License
+
+This project is open-source under the MIT License.
