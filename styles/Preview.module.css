@@ -1,0 +1,23 @@
+/* styles/Preview.module.css */
+.preview {
+    background: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 8.5in;
+    aspect-ratio: 8.5 / 11;
+    overflow: auto;
+  }
+  
+  .preview h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .preview p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }

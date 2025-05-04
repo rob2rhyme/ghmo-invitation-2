@@ -1,0 +1,58 @@
+/* styles/LetterheadForm.module.css */
+.formWrapper {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field > label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.field > input,
+.field > textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: #ffffff;
+  transition: background-color 0.2s;
+}
+
+.buttonSecondary {
+  background-color: #4b5563;
+}
+
+.button:hover {
+  background-color: #1e40af;
+}
+
+.buttonSecondary:hover {
+  background-color: #374151;
+}

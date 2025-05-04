@@ -1,0 +1,32 @@
+/* styles/Home.module.css */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  padding: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.previewWrapper {
+  flex: 2;
+}
